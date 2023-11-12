@@ -5,7 +5,7 @@ import { MacButtonsComponent } from "./mac-buttons";
 
 export function ChatComponent() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/chat",
+    api: "http://localhost:3000/api/chat",
   });
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -21,22 +21,24 @@ export function ChatComponent() {
           Chatbot para dieta
         </h1>
 
-        <div className="h-full flex flex-col">
-          <div className="py-5 flex-1 flex gap-3 overflow-y-scroll text-zinc-800">
-            <AvatarComponent src="https://github.com/DeyvisonTav.png" />
-            <div className="w-[600px] p-2">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius,
-              assumenda eligendi ab maiores quis asperiores aliquam dolorem
-              consequatur praesentium ad quaerat suscipit cum architecto dolore.
-              Unde excepturi nulla omnis earum. Lorem ipsum dolor sit amet
-              consectetur, adipisicing elit. Eius, assumenda eligendi ab maiores
-              quis asperiores aliquam dolorem consequatur praesentium ad quaerat
-              suscipit cum architecto dolore. Unde excepturi nulla omnis earum.
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius,
-              assumenda eligendi ab maiores quis asperiores aliquam dolorem
-              consequatur praesentium ad quaerat suscipit cum architecto dolore.
-              Unde excepturi nulla omnis earum.
-            </div>
+        <div className="min-w-[600px] flex flex-col h-full">
+          <div className="flex-1">
+            {messages.map((message) => {
+              return (
+                <div
+                  key={message.id}
+                  className="py-5 flex-1 flex gap-3 overflow-y-scroll text-zinc-800"
+                >
+                  {message.role === "assistant" ? (
+                    <AvatarComponent src="/vercel.svg" />
+                  ) : (
+                    <AvatarComponent src="https://github.com/DeyvisonTav.png" />
+                  )}
+
+                  <div className="w-[600px] p-2">{message.content}</div>
+                </div>
+              );
+            })}
           </div>
 
           <form
