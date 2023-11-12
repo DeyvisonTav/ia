@@ -4,9 +4,7 @@ import { AvatarComponent } from "./avatar";
 import { MacButtonsComponent } from "./mac-buttons";
 
 export function ChatComponent() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "http://localhost:3000/api/chat",
-  });
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <div
